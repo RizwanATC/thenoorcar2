@@ -309,6 +309,7 @@
                             android:textColor="@color/white">
                         </TextView>
                         <TextView
+                            android:id="@+id/txt_prayer"
                             android:includeFontPadding="false"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/avenirblack"
@@ -345,6 +346,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/txt_countDown"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/avenir"
                         android:layout_width="wrap_content"

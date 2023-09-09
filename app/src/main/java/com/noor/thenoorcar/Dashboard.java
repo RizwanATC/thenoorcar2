@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import androidx.core.app.ActivityCompat;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -44,70 +46,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends AppCompatActivity {
     private GpsTracker gpsTracker;
-    private TextView txt_time;
+    private TextView txt_time,txt_prayer,txt_countDown;
+    private RequestQueue mRequestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
+        txt_prayer = findViewById(R.id.txt_prayer);
         txt_time = findViewById(R.id.txt_time);
-        String endpoint = Url.url_thenoor_app + "solat/prayer_times/by_coordinates?coordinates=" + gpsTracker.getLatitude() + "%2C%20" + gpsTracker.getLongitude() + "&period=today";
-        JsonObjectRequest jsonReq = new JsonObjectRequest(
-                GET,
-                endpoint,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        try {
-                            JSONArray array_waktu_solat = new JSONArray(jsonObject.getString("hydra:member"));
-                            SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm:ss");
-                            Date todayDate = new Date();
-                            String serverTime = currentDate.format(todayDate);
+        txt_countDown = findViewById(R.id.txt_countDown);
+        mRequestQueue = Volley.newRequestQueue(this);
 
-                            // Create a LinkedHashMap of prayer times.
-                            LinkedHashMap<String, String> prayerTimes = new LinkedHashMap<>();
-                            for (int i = 0; i < array_waktu_solat.length(); i++) {
-                                JSONObject prayerTime_obj = array_waktu_solat.getJSONObject(i);
-                                prayerTimes.put("subuh", prayerTime_obj.getString("subuh"));
-                                prayerTimes.put("syuruk", prayerTime_obj.getString("syuruk"));
-                                prayerTimes.put("zohor", prayerTime_obj.getString("zohor"));
-                                prayerTimes.put("asar", prayerTime_obj.getString("asar"));
-                                prayerTimes.put("maghrib", prayerTime_obj.getString("maghrib"));
-                                prayerTimes.put("isyak", prayerTime_obj.getString("isyak"));
-                            }
 
-                            // Find the next prayer time after serverTime.
-                            for (Map.Entry<String, String> entry : prayerTimes.entrySet()) {
-                                if (checktimings(serverTime, convertDate(entry.getValue()))) {
-                                    String timetest =(convertDateToTime12hour(entry.getValue()).toUpperCase());
-                                    txt_time.setText(convertDateToTime12hour(entry.getValue()).toUpperCase());
-                                    break;  // Exit the loop once the next prayer time is found.
-                                }
-                            }
-                        } catch (JSONException | ParseException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(Dashboard.this, "Error retrieving data.", Toast.LENGTH_SHORT).show(); // A simple error handling
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
-        Volley.newRequestQueue(this).add(jsonReq);
     }
 
     @Override
@@ -116,66 +71,293 @@ public class Dashboard extends AppCompatActivity {
         getLocation();
     }
 
-   /* private void getWaktuSolatBasedOnLatLngToday(double latitude, double longitude) {
-        String endpoint = Url.url_thenoor_app + "solat/prayer_times/by_coordinates?coordinates=" + latitude + "%2C%20" + longitude + "&period=today";
-        JsonObjectRequest jsonReq = new JsonObjectRequest(
-                GET,
-                endpoint,
-                null,
+    private void fetchJsonData(double latitude ,double longitude) {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Url.url_thenoor_app+"solat/prayer_times/by_coordinates?coordinates="+latitude+"" +
+                "%2C%20"+longitude+"&period=today", null,
                 new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject jsonObject) {
+                    public void onResponse(JSONObject response) {
+                        // Handle the JSON response here
                         try {
-                            JSONArray array_waktu_solat = new JSONArray(jsonObject.getString("hydra:member"));
+                            JSONArray array_waktu_solat = new JSONArray(response.getString("hydra:member"));
                             SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm:ss");
                             Date todayDate = new Date();
                             String serverTime = currentDate.format(todayDate);
 
-                            // Create a LinkedHashMap of prayer times.
-                            LinkedHashMap<String, String> prayerTimes = new LinkedHashMap<>();
-                            for (int i = 0; i < array_waktu_solat.length(); i++) {
+                            for (int i = 0 ; i < array_waktu_solat.length(); i++){
                                 JSONObject prayerTime_obj = array_waktu_solat.getJSONObject(i);
-                                prayerTimes.put("subuh", prayerTime_obj.getString("subuh"));
-                                prayerTimes.put("syuruk", prayerTime_obj.getString("syuruk"));
-                                prayerTimes.put("zohor", prayerTime_obj.getString("zohor"));
-                                prayerTimes.put("asar", prayerTime_obj.getString("asar"));
-                                prayerTimes.put("maghrib", prayerTime_obj.getString("maghrib"));
-                                prayerTimes.put("isyak", prayerTime_obj.getString("isyak"));
+
+                                boolean fajr = checktimings(serverTime,convertDate(prayerTime_obj.getString("subuh")));
+                                if(fajr){
+                                    txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("subuh")).toUpperCase());
+                                    txt_prayer.setText("Subuh");
+                                    countdownSubuh(serverTime,prayerTime_obj);
+                                }else{
+                                    boolean syuruk = checktimings(serverTime,convertDate(prayerTime_obj.getString("syuruk")));
+                                    if(syuruk){
+                                        txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("syuruk")).toUpperCase());
+                                        txt_prayer.setText("Syuruk");
+                                    }else{
+                                        boolean dhuhr =  checktimings(serverTime,convertDate(prayerTime_obj.getString("zohor")));
+                                        if(dhuhr){
+                                            txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("zohor")).toUpperCase());
+                                            txt_prayer.setText("Zohor");
+                                            countdownZohor(serverTime,prayerTime_obj);
+                                        }else{
+                                            boolean asr = checktimings(serverTime,convertDate(prayerTime_obj.getString("asar")));
+                                            if(asr){
+                                                txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("asar")).toUpperCase());
+                                                txt_prayer.setText("Asar");
+                                                countdownAsar(serverTime,prayerTime_obj);
+                                            }else{
+                                                boolean maghrib = checktimings(serverTime,convertDate(prayerTime_obj.getString("maghrib")));
+                                                if(maghrib){
+                                                    txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("maghrib")).toUpperCase());
+                                                    txt_prayer.setText("Maghrib");
+                                                    countdownMargrib(serverTime,prayerTime_obj);
+                                                }else{
+                                                    boolean isha = checktimings(serverTime,convertDate(prayerTime_obj.getString("isyak")));
+                                                    if(isha){
+                                                        txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("isyak")).toUpperCase());
+                                                        txt_prayer.setText("Isyak");
+                                                        countdownIsyak(serverTime,prayerTime_obj);
+                                                    }else{
+                                                        /*getPrayertimeTomorrow(serverTime,latitude,longitude);*/
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+//                                }
                             }
 
-                            // Find the next prayer time after serverTime.
-                            for (Map.Entry<String, String> entry : prayerTimes.entrySet()) {
-                                if (checktimings(serverTime, convertDate(entry.getValue()))) {
-                                    String timetest =(convertDateToTime12hour(entry.getValue()).toUpperCase());
-                                    txt_time.setText(convertDateToTime12hour(entry.getValue()).toUpperCase());
-                                    break;  // Exit the loop once the next prayer time is found.
-                                }
-                            }
-                        } catch (JSONException | ParseException e) {
-                            e.printStackTrace();
+                            Log.d(TAG, "onResponse: "+response.toString());
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
                         }
 
+
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error here
+                        Log.d(TAG, "onErrorResponse: "+error.getMessage());
+
+                    }
+                });
+
+        mRequestQueue.add(request);
+    }
+    private void countdownSubuh(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
+        long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
+        long end_millis = convertTimetoMili(convertDate(objectArr.getString("subuh"))); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(Dashboard.this, "Error retrieving data.", Toast.LENGTH_SHORT).show(); // A simple error handling
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                if(hours == 0){
+                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                }else if(hours!=0){
+                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+
+                }
+
+
             }
-        }) {
+
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json");
-                return headers;
+            public void onFinish() {
+                txt_countDown.setText("Prayer Time!");
+                getLocation();
             }
         };
-        Volley.newRequestQueue(this).add(jsonReq);
-    }*/
+        cdt.start();
+    }
+    private void countdownZohor(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
+        long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
+        long end_millis = convertTimetoMili(convertDate(objectArr.getString("zohor"))); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                if(hours == 0){
+                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                }else if(hours!=0){
+                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+
+                }
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                txt_countDown.setText("Prayer Time!");
+                getLocation();
+            }
+        };
+        cdt.start();
+    }
+    private void countdownAsar(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
+        long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
+        long end_millis = convertTimetoMili(convertDate(objectArr.getString("asar"))); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                if(hours == 0){
+                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                }else if(hours!=0){
+                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+                txt_countDown.setText("Prayer Time!");
+                getLocation();
+            }
+        };
+        cdt.start();
+    }
+    private void countdownMargrib(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
+        long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
+        long end_millis = convertTimetoMili(convertDate(objectArr.getString("maghrib"))); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                if(hours == 0){
+                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                }else if(hours!=0){
+                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+                txt_countDown.setText("Prayer Time!");
+                getLocation();
+            }
+        };
+        cdt.start();
+    }
+
+    private void countdownIsyak(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
+        long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
+        long end_millis = convertTimetoMili(convertDate(objectArr.getString("isyak"))); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                if(hours == 0){
+                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                }else if(hours!=0){
+                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+
+                }
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                txt_countDown.setText("Prayer Time!");
+                getLocation();
+            }
+        };
+        cdt.start();
+    }
+
+    private long convertTimetoMili(String date) throws ParseException {
+        SimpleDateFormat spf=new SimpleDateFormat("HH:mm:ss");
+        Date newDate=spf.parse(date);
+        return newDate.getTime();
+    }
+
 
     public void getLocation() {
         gpsTracker = new GpsTracker(getApplication());
         if (gpsTracker.canGetLocation()) {
             Log.d(TAG, "getLocation: " + gpsTracker.getLatitude() + " " + gpsTracker.getLongitude());
+            fetchJsonData(gpsTracker.getLatitude(),gpsTracker.getLongitude());
+
         } else {
             gpsTracker.showSettingsAlert();
         }
