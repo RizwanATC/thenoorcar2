@@ -4,18 +4,25 @@ import static android.content.ContentValues.TAG;
 import static com.android.volley.Request.Method.GET;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import com.android.volley.AuthFailureError;
@@ -31,7 +38,9 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.noor.thenoorcar.Fragment.PrayerTime;
 import com.noor.thenoorcar.Function.GpsTracker;
+import com.noor.thenoorcar.Function.ScreenUtils;
 import com.noor.thenoorcar.URL.Url;
 
 import org.json.JSONArray;
@@ -50,8 +59,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends AppCompatActivity {
     private GpsTracker gpsTracker;
-    private TextView txt_time,txt_prayer,txt_countDown;
+    private TextView txt_time,txt_prayer,textView_countdown;
+
+    ImageView im_prayer;
     private RequestQueue mRequestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +71,101 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         txt_prayer = findViewById(R.id.txt_prayer);
         txt_time = findViewById(R.id.txt_time);
-        txt_countDown = findViewById(R.id.txt_countDown);
+        textView_countdown = findViewById(R.id.textView_countdown);
+        im_prayer = findViewById(R.id.im_prayer);
         mRequestQueue = Volley.newRequestQueue(this);
 
+        Point screenSize = ScreenUtils.getScreenSize(getApplicationContext());
+        int screenWidth = screenSize.x;
+        int screenHeight = screenSize.y;
+        Log.d(TAG, "onCreate: "+screenWidth+screenHeight);
 
+
+
+
+        SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        im_prayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int intValue = 0;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), DashboardMain.class);
+                startActivity(next);
+            }
+        });
+
+      /*  im_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                   *//* Intent next = new Intent(getApplicationContext(), TestAdaptAPIActivity.class);
+                    startActivity(next);*//*
+
+                int intValue = 1;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                startActivity(next);
+            }
+        });
+        im_prayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 0;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                startActivity(next);
+            }
+        });
+        im_compass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 2;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                startActivity(next);
+            }
+        });
+        im_quran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 3;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                startActivity(next);
+            }
+        });
+        im_asma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 4;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                startActivity(next);
+            }
+        });
+        im_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 5;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                startActivity(next);
+            }
+        });*/
     }
 
     @Override
@@ -133,7 +236,7 @@ public class Dashboard extends AppCompatActivity {
 //                                }
                             }
 
-                            Log.d(TAG, "onResponse: "+response.toString());
+
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         } catch (ParseException e) {
@@ -176,9 +279,9 @@ public class Dashboard extends AppCompatActivity {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -187,11 +290,26 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                txt_countDown.setText("Prayer Time!");
+                textView_countdown.setText("Prayer Time!");
                 getLocation();
             }
         };
         cdt.start();
+    }
+    public static String convertDateToTimesssss(String date){
+        DateFormat df = new SimpleDateFormat("EEEE, dd'th' MMMM yyyy");
+        //Date/time pattern of desired output date
+        DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dates = null;
+        String output = null;
+        try{
+            dates= df.parse(date);
+            output = outputformat.format(dates);
+        }catch(ParseException pe){
+            pe.printStackTrace();
+        }
+
+        return output;
     }
     private void countdownZohor(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
         long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
@@ -214,9 +332,9 @@ public class Dashboard extends AppCompatActivity {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -225,7 +343,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                txt_countDown.setText("Prayer Time!");
+                textView_countdown.setText("Prayer Time!");
                 getLocation();
             }
         };
@@ -252,9 +370,9 @@ public class Dashboard extends AppCompatActivity {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -262,7 +380,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                txt_countDown.setText("Prayer Time!");
+                textView_countdown.setText("Prayer Time!");
                 getLocation();
             }
         };
@@ -289,9 +407,9 @@ public class Dashboard extends AppCompatActivity {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -299,7 +417,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                txt_countDown.setText("Prayer Time!");
+                textView_countdown.setText("Prayer Time!");
                 getLocation();
             }
         };
@@ -327,9 +445,9 @@ public class Dashboard extends AppCompatActivity {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    txt_countDown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    txt_countDown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -338,7 +456,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                txt_countDown.setText("Prayer Time!");
+                textView_countdown.setText("Prayer Time!");
                 getLocation();
             }
         };
@@ -378,6 +496,21 @@ public class Dashboard extends AppCompatActivity {
 
         return output;
     }
+    public static String convertDateToTime(String date){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        //Date/time pattern of desired output date
+        DateFormat outputformat = new SimpleDateFormat("EEEE, dd'th' MMMM yyyy");
+        Date dates = null;
+        String output = null;
+        try{
+            dates= df.parse(date);
+            output = outputformat.format(dates);
+        }catch(ParseException pe){
+            pe.printStackTrace();
+        }
+
+        return output;
+    }
     private boolean checktimings(String time, String endtime) {
         String pattern = "HH:mm:ss";
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -403,5 +536,21 @@ public class Dashboard extends AppCompatActivity {
         date = spf.format(newDate);
         return date;
     }
+    public static String convertDateToNormal(String date){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        //Date/time pattern of desired output date
+        DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dates = null;
+        String output = null;
+        try{
+            dates= df.parse(date);
+            output = outputformat.format(dates);
+        }catch(ParseException pe){
+            pe.printStackTrace();
+        }
+
+        return output;
+    }
+
 
 }

@@ -26,7 +26,7 @@
             <LinearLayout
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -42,7 +42,7 @@
                         android:layout_height="match_parent">
                         <ImageView
                             android:id="@+id/backBtn"
-                            android:layout_width="30dp"
+                            android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/icon_back">
 
@@ -56,7 +56,7 @@
                         android:layout_height="match_parent">
                         <ImageView
                             android:id="@+id/noorLogo"
-                            android:layout_width="80dp"
+                            android:layout_width="150dp"
                             android:layout_height="50dp"
                             android:src="@drawable/the_noor_icon">
 
@@ -66,6 +66,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -80,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textColor="@android:color/white"
-                            android:textSize="22dp" />
+                            android:textSize="44dp" />
                         <TextView
                             android:includeFontPadding="false"
                             android:fontFamily="@font/avenirblack"
@@ -89,7 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/white"
-                            android:textSize="22dp" />
+                            android:textSize="44dp" />
                         <TextView
                             android:text="testing"
                             android:id="@+id/textView_countdown"
@@ -97,10 +98,12 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textColor="@android:color/white"
-                            android:textSize="22dp" />
+                            android:textSize="44dp" />
 
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="50dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -152,8 +155,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
                                 android:src="@drawable/icon_location">
                             </ImageView>
                             <TextView
@@ -163,7 +166,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Location"
                                 android:textColor="@color/white"
-                                android:textSize="22dp">
+                                android:textSize="44dp">
                             </TextView>
                         </LinearLayout>
 

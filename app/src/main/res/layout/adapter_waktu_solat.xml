@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <LinearLayout
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/avenir"
+                        android:text="Hijri Date"
+                        android:id="@+id/tv_date_hijri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="22dp" />
+                    <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/avenir"
+                        android:text="Masihi Date"
+                        android:id="@+id/date_masihi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="22dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_vertical|right"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:visibility="visible"
+                        android:id="@+id/back_today"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/back_prayer_btn">
+                        <TextView
+                            android:textSize="18dp"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Back to today"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/avenir"
+                            android:textColor="#FFFFFF">
+
+                        </TextView>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_zohor" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="Subuh"
+                            android:id="@+id/tv_prayer_subuh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="06:35 AM"
+                            android:id="@+id/tv_waktu_subuh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_zohor" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="Zohor"
+                            android:id="@+id/tv_prayer_zohor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="06:35 AM"
+                            android:id="@+id/tv_waktu_zohor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_zohor" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="Asar"
+                            android:id="@+id/tv_prayer_asar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="06:35 AM"
+                            android:id="@+id/tv_waktu_asar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_zohor" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="Maghrib"
+                            android:id="@+id/tv_prayer_maghrib"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+                        <TextView
+
+                            android:includeFontPadding="false"
+                            android:text="06:35 AM"
+                            android:id="@+id/tv_waktu_maghrib"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_zohor" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="Isyak"
+                            android:id="@+id/tv_prayer_isyak"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+                        <TextView
+                            android:includeFontPadding="false"
+                            android:text="06:35 AM"
+                            android:id="@+id/tv_waktu_isyak"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="30dp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

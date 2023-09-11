@@ -55,14 +55,15 @@
                                 </LinearLayout>
                                 <LinearLayout
                                     android:gravity="center_horizontal"
-                                    android:layout_weight="0.3"
+                                    android:layout_weight="0.4"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <TextView
+                                        android:includeFontPadding="false"
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal"
                                         android:textColor="@color/white"
-                                        android:textSize="38dp"
+                                        android:textSize="30dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/quran">
@@ -92,14 +93,15 @@
                                 </LinearLayout>
                                 <LinearLayout
                                     android:gravity="center_horizontal"
-                                    android:layout_weight="0.3"
+                                    android:layout_weight="0.4"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <TextView
+                                        android:includeFontPadding="false"
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal"
                                         android:textColor="@color/white"
-                                        android:textSize="38dp"
+                                        android:textSize="30dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/infinite">
@@ -120,6 +122,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <ImageView
+                                        android:id="@+id/im_prayer"
                                         android:src="@drawable/icon_quran"
                                         android:layout_gravity="center"
                                         android:layout_width="match_parent"
@@ -129,14 +132,15 @@
                                 </LinearLayout>
                                 <LinearLayout
                                     android:gravity="center_horizontal"
-                                    android:layout_weight="0.3"
+                                    android:layout_weight="0.4"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <TextView
+                                        android:includeFontPadding="false"
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal"
                                         android:textColor="@color/white"
-                                        android:textSize="38dp"
+                                        android:textSize="30dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/prayer">
@@ -183,14 +187,15 @@
                                 </LinearLayout>
                                 <LinearLayout
                                     android:gravity="center_horizontal"
-                                    android:layout_weight="0.3"
+                                    android:layout_weight="0.4"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <TextView
+                                        android:includeFontPadding="false"
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal"
                                         android:textColor="@color/white"
-                                        android:textSize="38dp"
+                                        android:textSize="30dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/location">
@@ -220,18 +225,19 @@
                                 </LinearLayout>
                                 <LinearLayout
                                     android:gravity="center_horizontal"
-                                    android:layout_weight="0.3"
+                                    android:layout_weight="0.4"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
+
                                     <TextView
-                                        android:fontFamily="@font/avenirblack"
-                                        android:gravity="center_horizontal"
-                                        android:textColor="@color/white"
-                                        android:textSize="38dp"
+                                        android:includeFontPadding="false"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:text="@string/compass">
-                                    </TextView>
+                                        android:fontFamily="@font/avenirblack"
+                                        android:gravity="center_horizontal"
+                                        android:text="@string/compass"
+                                        android:textColor="@color/white"
+                                        android:textSize="30dp"></TextView>
 
                                 </LinearLayout>
 
@@ -257,14 +263,15 @@
                                 </LinearLayout>
                                 <LinearLayout
                                     android:gravity="center_horizontal"
-                                    android:layout_weight="0.3"
+                                    android:layout_weight="0.4"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <TextView
+                                        android:includeFontPadding="false"
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal"
                                         android:textColor="@color/white"
-                                        android:textSize="38dp"
+                                        android:textSize="30dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/name99">
@@ -346,7 +353,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/txt_countDown"
+                        android:id="@+id/textView_countdown"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/avenir"
                         android:layout_width="wrap_content"
@@ -360,8 +367,8 @@
                         android:layout_height="match_parent">
                         <ImageView
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_width="200dp"
+
+                            android:layout_width="150dp"
                             android:layout_height="100dp"
                             android:src="@drawable/the_noor_icon">
                         </ImageView>
