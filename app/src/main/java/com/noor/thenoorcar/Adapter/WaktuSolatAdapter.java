@@ -165,10 +165,6 @@ public class WaktuSolatAdapter extends RecyclerView.Adapter<WaktuSolatAdapter.Wa
             waktuisyak = itemView.findViewById(R.id.tv_prayer_isyak);
             back_today = itemView.findViewById(R.id.back_today);
 
-            ;
-
-
-
 
 
 

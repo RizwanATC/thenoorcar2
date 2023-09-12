@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:colorControlHighlight">
+    <item android:drawable="@drawable/seek_bar_play" android:width="25dp" android:height="25dp">
+    </item>
+</ripple>

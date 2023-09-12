@@ -61,7 +61,7 @@ public class Dashboard extends AppCompatActivity {
     private GpsTracker gpsTracker;
     private TextView txt_time,txt_prayer,textView_countdown;
 
-    ImageView im_prayer;
+    ImageView im_prayer,im_asma;
     private RequestQueue mRequestQueue;
 
 
@@ -73,6 +73,7 @@ public class Dashboard extends AppCompatActivity {
         txt_time = findViewById(R.id.txt_time);
         textView_countdown = findViewById(R.id.textView_countdown);
         im_prayer = findViewById(R.id.im_prayer);
+        im_asma = findViewById(R.id.im_asma);
         mRequestQueue = Volley.newRequestQueue(this);
 
         Point screenSize = ScreenUtils.getScreenSize(getApplicationContext());
@@ -90,6 +91,18 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int intValue = 0;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), DashboardMain.class);
+                startActivity(next);
+            }
+        });
+
+        im_asma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 1;
                 editor.putInt("int_key", intValue);
                 editor.apply();
                 Intent next = new Intent(getApplicationContext(), DashboardMain.class);
