@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.noor.thenoorcar.Fragment.AsmaFragment;
+import com.noor.thenoorcar.Fragment.CompassFragment;
+import com.noor.thenoorcar.Fragment.LocationFragment;
 import com.noor.thenoorcar.Fragment.PrayerTime;
 
 public class DashboardMain extends AppCompatActivity {
@@ -27,6 +29,20 @@ public class DashboardMain extends AppCompatActivity {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.fragment_container, new AsmaFragment())
+                    .commit();
+
+        }
+        if(intValue==2){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new LocationFragment())
+                    .commit();
+
+        }
+        if(intValue==3){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new CompassFragment())
                     .commit();
         }
        /* if(intValue==2){

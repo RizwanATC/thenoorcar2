@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.Asma">
+    >
 
     <!-- TODO: Update blank fragment layout -->
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
                       android:layout_width="0dp"
                       android:layout_height="match_parent">
                       <ImageView
-                          android:id="@+id/backBtn"
+                          android:id="@+id/icon_menu_back"
                           android:layout_width="50dp"
                           android:layout_height="50dp"
                           android:src="@drawable/icon_back">

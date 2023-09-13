@@ -178,6 +178,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <ImageView
+                                        android:id="@+id/im_location"
                                         android:src="@drawable/icon_mosque"
                                         android:layout_gravity="center"
                                         android:layout_width="match_parent"
@@ -216,6 +217,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp">
                                     <ImageView
+                                        android:id="@+id/im_compass"
                                         android:src="@drawable/icon_qiblat"
                                         android:layout_gravity="center"
                                         android:layout_width="match_parent"

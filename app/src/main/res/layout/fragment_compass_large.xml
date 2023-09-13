@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.CompassFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_main">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintSilver"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/silver_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:gravity="left"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/icon_menu_back"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/icon_back">
+
+                        </ImageView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="right"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/noorLogo"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/the_noor_icon">
+
+                        </ImageView>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="1"
+                            android:fontFamily="@font/avenirheavy"
+                            android:id="@+id/textView_degree_compass"
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Qibla : 292°"
+                            android:textColor="#FFFFFF"
+                            android:textSize="44dp" />
+                        <TextView
+                            android:fontFamily="@font/avenirheavy"
+                            android:id="@+id/textView_degree_current"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Current : 292°"
+                            android:textColor="#FFFFFF"
+                            android:textSize="44dp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:id="@+id/rotate"
+                            android:layout_width="match_parent"
+                            android:layout_height="400dp">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image_dial_compass_two"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="150dp"
+                                android:src="@drawable/icon_compass_kaabah_two" />
+
+                            <LinearLayout
+
+                                android:id="@+id/my3dLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_marginTop="100dp"
+                                    android:id="@+id/image_dial_compass"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="250dp"
+                                    android:paddingLeft="35dp"
+                                    android:paddingRight="35dp"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/icon_compass_kaabah_one" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView_location_compass"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Kuala Lumpur"
+                            android:textColor="@android:color/white"
+                            android:textSize="32dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

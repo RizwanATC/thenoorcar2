@@ -39,6 +39,7 @@ import com.noor.thenoorcar.Adapter.AsmaReciterAdapter;
 import com.noor.thenoorcar.Adapter.adapterAsma;
 import com.noor.thenoorcar.Class.AsmaClass;
 import com.noor.thenoorcar.Class.AsmaReciterClass;
+import com.noor.thenoorcar.Dashboard;
 import com.noor.thenoorcar.Function.PreferenceLanguage;
 import com.noor.thenoorcar.Function.PreferenceReciterAsma;
 import com.noor.thenoorcar.Function.ScreenUtils;
@@ -125,14 +126,14 @@ public class AsmaFragment extends Fragment {
         profile_image = v.findViewById(R.id.profile_image);
 
         icon_menu_back = v.findViewById(R.id.icon_menu_back);
-       /* icon_menu_back.setOnClickListener(new View.OnClickListener() {
+        icon_menu_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivityV2.class);
+                Intent intent = new Intent(getActivity(), Dashboard.class);
                 startActivity(intent);
 
             }
-        });*/
+        });
 
         getReciterAsmaByDefault();
 
