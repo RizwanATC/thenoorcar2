@@ -10,6 +10,7 @@ import com.noor.thenoorcar.Fragment.AsmaFragment;
 import com.noor.thenoorcar.Fragment.CompassFragment;
 import com.noor.thenoorcar.Fragment.LocationFragment;
 import com.noor.thenoorcar.Fragment.PrayerTime;
+import com.noor.thenoorcar.Fragment.RadioFragment;
 
 public class DashboardMain extends AppCompatActivity {
     @Override
@@ -43,6 +44,12 @@ public class DashboardMain extends AppCompatActivity {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.fragment_container, new CompassFragment())
+                    .commit();
+        }
+        if(intValue==4){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new RadioFragment())
                     .commit();
         }
        /* if(intValue==2){

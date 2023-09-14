@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.noor.thenoorcar"
-        minSdk 28
+        minSdk 21
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -46,6 +48,18 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+/*
+    implementation 'com.google.android.exoplayer:exoplayer:2.12.0'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.9.6'
+    implementation 'com.google.android.exoplayer:extension-mediasession:2.9.6'*/
+    implementation 'androidx.media:media:1.5.0'
+
+    implementation 'com.airbnb.android:lottie:3.1.0'
+    implementation 'androidx.core:core:1.9.0'
+
+
+
 
 
 
