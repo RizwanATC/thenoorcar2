@@ -58,6 +58,17 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.1.0'
     implementation 'androidx.core:core:1.9.0'
 
+    implementation 'com.google.android.exoplayer:exoplayer:2.15.1'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.15.1'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.15.1'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.15.1'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.15.1'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.15.1'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+
+    implementation 'com.github.wseemann:FFmpegMediaPlayer:1.0.4'
+
+
 
 
 

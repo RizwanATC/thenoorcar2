@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.noor.thenoorcar.Fragment.AlquranFragment;
+import com.noor.thenoorcar.Fragment.AlquranFragmentV2;
 import com.noor.thenoorcar.Fragment.AsmaFragment;
 import com.noor.thenoorcar.Fragment.CompassFragment;
 import com.noor.thenoorcar.Fragment.LocationFragment;
@@ -50,6 +52,12 @@ public class DashboardMain extends AppCompatActivity {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.fragment_container, new RadioFragment())
+                    .commit();
+        }
+        if(intValue==5){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new AlquranFragment())
                     .commit();
         }
        /* if(intValue==2){

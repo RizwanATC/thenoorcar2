@@ -64,7 +64,7 @@
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal|center_vertical"
                                         android:textColor="@color/white"
-                                        android:textSize="20dp"
+                                        android:textSize="32dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/quran">
@@ -103,7 +103,7 @@
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal|center_vertical"
                                         android:textColor="@color/white"
-                                        android:textSize="20dp"
+                                        android:textSize="32dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/infinite">
@@ -142,7 +142,7 @@
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal|center_vertical"
                                         android:textColor="@color/white"
-                                        android:textSize="20dp"
+                                        android:textSize="32dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/prayer">
@@ -198,7 +198,7 @@
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal|center_vertical"
                                         android:textColor="@color/white"
-                                        android:textSize="20dp"
+                                        android:textSize="32dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/location">
@@ -241,7 +241,7 @@
                                         android:gravity="center_horizontal|center_vertical"
                                         android:text="@string/compass"
                                         android:textColor="@color/white"
-                                        android:textSize="20dp"></TextView>
+                                        android:textSize="32dp"></TextView>
 
                                 </LinearLayout>
 
@@ -276,7 +276,7 @@
                                         android:fontFamily="@font/avenirblack"
                                         android:gravity="center_horizontal|center_vertical"
                                         android:textColor="@color/white"
-                                        android:textSize="20dp"
+                                        android:textSize="32dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/name99">
@@ -298,9 +298,10 @@
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
+
                 <LinearLayout
 
                     android:gravity="right"
@@ -308,8 +309,8 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:src="@drawable/icon_setting">
                     </ImageView>
                     <LinearLayout
@@ -321,7 +322,7 @@
                             android:fontFamily="@font/avenir"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
+                            android:textSize="32dp"
                             android:text="Next Prayer"
                             android:textColor="@color/white">
                         </TextView>
@@ -340,14 +341,13 @@
 
                         </ImageView>
                         <TextView
-
                             android:id="@+id/txt_prayer"
                             android:includeFontPadding="false"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="10dp"
                             android:fontFamily="@font/avenirblack"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="50dp"
+                            android:textSize="80dp"
                             android:text="Asar"
                             android:textColor="@color/white">
                         </TextView>
@@ -359,7 +359,7 @@
                             android:fontFamily="@font/avenirblack"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="38dp"
+                            android:textSize="54dp"
                             android:text="04:05 PM"
                             android:textColor="@color/white">
                         </TextView>
@@ -372,20 +372,19 @@
                         android:fontFamily="@font/avenir"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+                        android:textSize="32dp"
                         android:text="Countdown in 05 17sec"
                         android:textColor="@color/white">
                     </TextView>
                     <RelativeLayout
-
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <ImageView
-                            android:layout_marginBottom="10dp"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="10dp"
                             android:layout_width="150dp"
-                            android:layout_height="50dp"
+                            android:layout_height="100dp"
                             android:src="@drawable/the_noor_icon">
                         </ImageView>
 

@@ -1,0 +1,388 @@
+<resources>
+
+    <declare-styleable name="SelectableTextView">
+        <attr name="selected_color" format="color" />
+        <attr name="cursor_handle_color" format="color"></attr>
+    </declare-styleable>
+
+    <style name="SpinnerThemes" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/custom_spinner</item>
+    </style>
+
+    <style name="spinner_state">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/avenirbook</item>
+    </style>
+
+    <!-- Base application theme. -->
+   <!-- <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorFrontOnBoarding3</item>
+    </style>-->
+
+    <!--<style name="AppThemeFullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+&lt;!&ndash;        <item name="android:windowFullscreen">true</item>&ndash;&gt;
+&lt;!&ndash;        <item name="android:windowContentOverlay">@null</item>&ndash;&gt;
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="colorAccent">@color/colorFrontOnBoarding3</item>
+    </style>-->
+
+    <style name="NavigationDrawerStyle">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">11dp</item>
+        <item name="android:fontFamily">@font/avenir</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">11dp</item>
+        <item name="android:fontFamily">@font/avenir</item>
+    </style>
+
+
+
+    <style name="DialogAnimation" >
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+    </style>
+
+    <style name="DialogNoti">
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="DialogNotiss">
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+    </style>
+    <style name="miniGameDialog">
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+    </style>
+
+    <style name="DialogNotiTNG">
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+    </style>
+    <style name="DalogKhas">
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window2</item>
+    </style>
+
+
+    <style name="DialogNotiTNG2">
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+        <item name="android:layout_marginTop" type="dimen">20dp</item>
+    </style>
+
+    <style name="MyAnimation.Window2" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_left</item>
+    </style>
+    <style name="MyAnimation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/bottom_to_top</item>
+        <item name="android:windowExitAnimation">@anim/bottom_to_top_2</item>
+    </style>
+
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_marginLeft">-3dp</item>
+    </style>
+
+    <style name="AppSearchViewSearch" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/avenirblack</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:layout_marginLeft">-3dp</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+
+    <style name="AppSearchViewGlobal" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_marginLeft">-3dp</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="NewDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+        <item name="android:layout_margin" type="dimen">8dp</item>
+    </style>
+
+    <style name="NewDialogSettings">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+        <item name="android:layout_margin" type="dimen">15dp</item>
+    </style>
+
+    <style name="QrDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">400dp</item>
+        <item name="android:layout_margin" type="dimen">15dp</item>
+    </style>
+    <style name="alRajhi">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">400dp</item>
+        <item name="android:layout_margin" type="dimen">10dp</item>
+    </style>
+    <style name="imageViewDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+    </style>
+
+    <style name="imageViewTabarruDialog">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+    </style>
+
+    <style name="settingDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">400dp</item>
+        <item name="android:layout_margin" type="dimen">12dp</item>
+    </style>
+    <style name="QrDialog2">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">400dp</item>
+        <item name="android:layout_margin" type="dimen">10dp</item>
+    </style>
+
+    <style name="QrDialog4">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">500dp</item>
+        <item name="android:layout_margin" type="dimen">5dp</item>
+    </style>
+
+    <style name="profileUpdate">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">500dp</item>
+        <item name="android:layout_margin" type="dimen">12dp</item>
+    </style>
+
+    <style name="ZikirDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">350dp</item>
+        <item name="android:layout_margin" type="dimen">8dp</item>
+    </style>
+
+    <style name="ZikirDialogSecond">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="hisnulDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">400dp</item>
+        <item name="android:layout_margin" type="dimen">8dp</item>
+    </style>
+
+
+    <style name="dialogFilterSurah">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+        <item name="android:layout_margin" type="dimen">8dp</item>
+    </style>
+
+    <style name="dialogFilterSurahs">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">380dp</item>
+        <item name="android:layout_margin" type="dimen">15dp</item>
+    </style>
+
+    <style name="dialogFilterSurahsMushaf">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">380dp</item>
+        <item name="android:layout_margin" type="dimen">20dp</item>
+    </style>
+
+    <style name="dialogReciterPlayer">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">560dp</item>
+        <item name="android:layout_margin" type="dimen">7dp</item>
+    </style>
+
+    <style name="NewDialogFont">
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedWidthMinor">90%</item>
+    </style>
+
+    <style name="SpinnerTheme">
+        <item name="android:fontFamily">@font/avenirbook</item>
+    </style>
+
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#25BEDF</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <item name="android:colorForeground">#b3b8b9
+        </item>
+    </style>
+
+    <style name="SCBSwitchs" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#32D74B</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <item name="android:colorForeground">#b3b8b9
+        </item>
+    </style>
+
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/avenirheavy</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="ActionItem">
+        <item name="android:textSize">12dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="BottomDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/translate_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_dialog_out</item>
+    </style>
+
+    <style name="NewDialogMushaf">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+    </style>
+
+    <style name="DialogAnimationV2">
+        <item name="android:windowEnterAnimation">@anim/translate_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_dialog_out</item>
+    </style>
+    <style name="DialogSlideAnim" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimationV2</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:minWidth" type="dimen">600dp</item>
+    </style>
+</resources>

@@ -1,44 +1,27 @@
 package com.noor.thenoorcar;
 
 import static android.content.ContentValues.TAG;
-import static com.android.volley.Request.Method.GET;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.noor.thenoorcar.Fragment.PrayerTime;
 import com.noor.thenoorcar.Function.GpsTracker;
 import com.noor.thenoorcar.Function.ScreenUtils;
 import com.noor.thenoorcar.URL.Url;
@@ -46,29 +29,35 @@ import com.noor.thenoorcar.URL.Url;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends AppCompatActivity {
     private GpsTracker gpsTracker;
     private TextView txt_time,txt_prayer,textView_countdown;
 
-    ImageView im_prayer,im_asma,im_location,im_compass,im_radio;
+    ImageView im_prayer,im_asma,im_location,im_compass,im_radio,im_quran;
     private RequestQueue mRequestQueue;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point screenSize = new Point();
+        display.getSize(screenSize);
+        int screenWidth = screenSize.x;
+        int screenHeight = screenSize.y; // If needed
+
+        // Choose the layout based on the screen width
+        int layoutResId = (screenWidth == 1920) ? R.layout.activity_dashboard : R.layout.activity_dashboard_large;
+
+        // Set the content view for the activity
+        setContentView(layoutResId);
         txt_prayer = findViewById(R.id.txt_prayer);
         txt_time = findViewById(R.id.txt_time);
         textView_countdown = findViewById(R.id.textView_countdown);
@@ -77,13 +66,11 @@ public class Dashboard extends AppCompatActivity {
         im_location = findViewById(R.id.im_location);
         im_compass = findViewById(R.id.im_compass);
         im_radio = findViewById(R.id.im_radio);
+        im_quran = findViewById(R.id.im_quran);
 
         mRequestQueue = Volley.newRequestQueue(this);
 
-        Point screenSize = ScreenUtils.getScreenSize(getApplicationContext());
-        int screenWidth = screenSize.x;
-        int screenHeight = screenSize.y;
-        Log.d(TAG, "onCreate: "+screenWidth+screenHeight);
+
 
 
 
@@ -138,6 +125,17 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int intValue = 4;
+                editor.putInt("int_key", intValue);
+                editor.apply();
+                Intent next = new Intent(getApplicationContext(), DashboardMain.class);
+                startActivity(next);
+            }
+        });
+        im_quran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int intValue = 5;
                 editor.putInt("int_key", intValue);
                 editor.apply();
                 Intent next = new Intent(getApplicationContext(), DashboardMain.class);
