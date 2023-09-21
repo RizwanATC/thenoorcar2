@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "803757853249",
+    "firebase_url": "https://thenoor-5db6c-default-rtdb.firebaseio.com",
+    "project_id": "thenoor-5db6c",
+    "storage_bucket": "thenoor-5db6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803757853249:android:21fcf88d339d2d489f54c0",
+        "android_client_info": {
+          "package_name": "com.thenoor.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803757853249-c4l6uokmich6lf9dbmte6ngp7ef30ngm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thenoor.app",
+            "certificate_hash": "6dedb1406068f267ddcb2ca21432d6d9d595fc79"
+          }
+        },
+        {
+          "client_id": "803757853249-97vgqf9k8a67aofi66rrihh4kvir9o4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCngCnkTY0FyZKOO9AZeoJlpkw6AdOCYmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803757853249-97vgqf9k8a67aofi66rrihh4kvir9o4a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "803757853249-389cc9u4te2rjrf9v0hqim8o8jj372ab.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thenoor.ios.apps"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803757853249:android:1d9931fa4a7bdbb89f54c0",
+        "android_client_info": {
+          "package_name": "com.thenoor.app.lite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803757853249-97vgqf9k8a67aofi66rrihh4kvir9o4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCngCnkTY0FyZKOO9AZeoJlpkw6AdOCYmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803757853249-97vgqf9k8a67aofi66rrihh4kvir9o4a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "803757853249-389cc9u4te2rjrf9v0hqim8o8jj372ab.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thenoor.ios.apps"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
