@@ -192,59 +192,6 @@ public class AsmaFragment extends Fragment {
                 }else {
                     if(status_play == 0){
 
-                       /* if(!SurahFragment.status_play_surah.equals("0")){
-                            SurahFragment.status_play_surah = "0";
-                            if(SurahFragment.exoPlayer != null){
-                                SurahFragment.exoPlayer.stop();
-                            }
-                            if(SurahFragment.exoPlayer_translation != null){
-                                SurahFragment.exoPlayer_translation.stop();
-                            }
-                            SurahFragment.position_play = -1;
-
-                            if(SurahFragment.timer != null){
-                                SurahFragment.timer.cancel();
-                            }
-
-                            SurahFragment.click_last_read = 0;
-                            SurahFragment.surah_length_counting =0;
-                            SurahFragment.surah_length_temp_counting = 0;
-                            SurahFragment.count_global = 0;
-                            SurahFragment.count_surah_read =0;
-                            Drawable big_icon = getResources().getDrawable(R.drawable.play_asma_icon);
-                            SurahFragment.imageView_play.setImageDrawable(big_icon);
-                            if(SurahFragment.timer_translation != null){
-                                SurahFragment.timer_translation.cancel();
-                            }
-                            if(SurahFragment.exoPlayer_translator != null){
-                                SurahFragment.exoPlayer_translator.stop();
-                            }
-                        }
-
-                        if(!AlquranFragment.status_play_surah.equals("0")){
-                            getActivity().stopService(new Intent(getActivity(), AlQuranPlayerService.class));
-                            AlquranFragment.status_play_surah = "0";
-                            AlquranFragment.current_play_position = -1;
-                            AlquranFragment.surah_play_right_now = -1;
-                            AlquranFragment.exoPlayer.stop();
-                            AlquranFragment.seekBar.setProgress(0);
-                            Drawable big_icon = getResources().getDrawable(R.drawable.play_asma_icon);
-                            AlquranFragment.imageView_play_pause.setImageDrawable(big_icon);
-                            AlquranFragment.mAdapter.notifyDataSetChanged();
-                            if(yourCountDownTimer != null){
-                                yourCountDownTimer.cancel();
-                                AlquranFragment.textView_begining.setText("00:00");
-                            }
-                        }
-
-                        if(!RadioActivity.status_play_radio.equals("0")){
-                            RadioActivity.lottieAnimationView_wave.cancelAnimation();
-                            RadioActivity.lottieAnimationView_wave2.cancelAnimation();
-                            RadioActivity.status_play_radio = "0";
-                            getActivity().stopService(new Intent(getActivity(), RadioService.class));
-                            RadioActivity.exoPlayer.stop();
-                            RadioService.hanlder.removeMessages(0);
-                        }*/
 
 
                         Drawable icon_change = getActivity().getResources().getDrawable(R.drawable.pause_asama_icon);

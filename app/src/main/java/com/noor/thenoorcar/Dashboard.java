@@ -40,7 +40,7 @@ public class Dashboard extends AppCompatActivity {
     private GpsTracker gpsTracker;
     private TextView txt_time,txt_prayer,textView_countdown;
 
-    ImageView im_prayer,im_asma,im_location,im_compass,im_radio,im_quran;
+    ImageView im_prayer,im_asma,im_location,im_compass,im_radio,im_quran,im_setting;
     private RequestQueue mRequestQueue;
 
 
@@ -67,6 +67,7 @@ public class Dashboard extends AppCompatActivity {
         im_compass = findViewById(R.id.im_compass);
         im_radio = findViewById(R.id.im_radio);
         im_quran = findViewById(R.id.im_quran);
+        im_setting = findViewById(R.id.im_setting);
 
         mRequestQueue = Volley.newRequestQueue(this);
 
@@ -142,76 +143,15 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(next);
             }
         });
-
-      /*  im_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                   *//* Intent next = new Intent(getApplicationContext(), TestAdaptAPIActivity.class);
-                    startActivity(next);*//*
-
-                int intValue = 1;
-                editor.putInt("int_key", intValue);
-                editor.apply();
-                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
-                startActivity(next);
-            }
-        });
-        im_prayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                int intValue = 0;
-                editor.putInt("int_key", intValue);
-                editor.apply();
-                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
-                startActivity(next);
-            }
-        });
-        im_compass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                int intValue = 2;
-                editor.putInt("int_key", intValue);
-                editor.apply();
-                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
-                startActivity(next);
-            }
-        });
-        im_quran.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                int intValue = 3;
-                editor.putInt("int_key", intValue);
-                editor.apply();
-                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
-                startActivity(next);
-            }
-        });
-        im_asma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                int intValue = 4;
-                editor.putInt("int_key", intValue);
-                editor.apply();
-                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
-                startActivity(next);
-            }
-        });
         im_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                int intValue = 5;
-                editor.putInt("int_key", intValue);
-                editor.apply();
-                Intent next = new Intent(getApplicationContext(), MainActivityCar.class);
+                Intent next = new Intent(getApplicationContext(), Setting.class);
                 startActivity(next);
             }
-        });*/
+        });
+
+
     }
 
     @Override

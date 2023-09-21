@@ -308,6 +308,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/im_setting"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/icon_setting">
