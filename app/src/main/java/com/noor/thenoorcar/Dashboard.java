@@ -2,10 +2,13 @@ package com.noor.thenoorcar;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -24,6 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.noor.thenoorcar.Function.GpsTracker;
 import com.noor.thenoorcar.Function.ScreenUtils;
+import com.noor.thenoorcar.Service.AlarmReceiver;
 import com.noor.thenoorcar.URL.Url;
 
 import org.json.JSONArray;
@@ -42,6 +46,8 @@ public class Dashboard extends AppCompatActivity {
 
     ImageView im_prayer,im_asma,im_location,im_compass,im_radio,im_quran,im_setting;
     private RequestQueue mRequestQueue;
+
+    public static String azantime="";
 
 
     @Override
@@ -146,8 +152,9 @@ public class Dashboard extends AppCompatActivity {
         im_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent next = new Intent(getApplicationContext(), Setting.class);
-                startActivity(next);
+               /* Intent next = new Intent(getApplicationContext(), Setting.class);
+                startActivity(next);*/
+                triggerAlarm();
             }
         });
 
@@ -159,6 +166,24 @@ public class Dashboard extends AppCompatActivity {
         super.onResume();
         getLocation();
     }
+
+    private void triggerAlarm() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        // Trigger the alarm immediately
+        if (alarmManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
+            }
+        }
+    }
+
 
     private void fetchJsonData(double latitude ,double longitude) {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Url.url_thenoor_app+"solat/prayer_times/by_coordinates?coordinates="+latitude+"" +
@@ -181,6 +206,8 @@ public class Dashboard extends AppCompatActivity {
                                     txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("subuh")).toUpperCase());
                                     txt_prayer.setText("Subuh");
                                     countdownSubuh(serverTime,prayerTime_obj);
+                                    azantime="Azan Subuh";
+                                    triggerAlarm();
                                 }else{
                                     boolean syuruk = checktimings(serverTime,convertDate(prayerTime_obj.getString("syuruk")));
                                     if(syuruk){
@@ -192,24 +219,32 @@ public class Dashboard extends AppCompatActivity {
                                             txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("zohor")).toUpperCase());
                                             txt_prayer.setText("Zohor");
                                             countdownZohor(serverTime,prayerTime_obj);
+                                            azantime="Azan Zohor";
+                                            triggerAlarm();
                                         }else{
                                             boolean asr = checktimings(serverTime,convertDate(prayerTime_obj.getString("asar")));
                                             if(asr){
                                                 txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("asar")).toUpperCase());
                                                 txt_prayer.setText("Asar");
                                                 countdownAsar(serverTime,prayerTime_obj);
+                                                azantime="Azan Asar";
+                                                triggerAlarm();
                                             }else{
                                                 boolean maghrib = checktimings(serverTime,convertDate(prayerTime_obj.getString("maghrib")));
                                                 if(maghrib){
                                                     txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("maghrib")).toUpperCase());
                                                     txt_prayer.setText("Maghrib");
                                                     countdownMargrib(serverTime,prayerTime_obj);
+                                                    azantime="Azan Maghrib";
+                                                    triggerAlarm();
                                                 }else{
                                                     boolean isha = checktimings(serverTime,convertDate(prayerTime_obj.getString("isyak")));
                                                     if(isha){
                                                         txt_time.setText(convertDateToTime12hour(prayerTime_obj.getString("isyak")).toUpperCase());
                                                         txt_prayer.setText("Isyak");
                                                         countdownIsyak(serverTime,prayerTime_obj);
+                                                        azantime="Azan Isyak";
+                                                        triggerAlarm();
                                                     }else{
                                                         /*getPrayertimeTomorrow(serverTime,latitude,longitude);*/
                                                     }

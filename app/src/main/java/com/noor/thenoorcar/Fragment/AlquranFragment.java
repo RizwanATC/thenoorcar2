@@ -15,6 +15,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -53,6 +54,7 @@ import com.noor.thenoorcar.Class.LoadingDialog;
 import com.noor.thenoorcar.Class.ReciterClass;
 import com.noor.thenoorcar.Class.SurahClass;
 import com.noor.thenoorcar.Common.PreferenceManagerReciter;
+import com.noor.thenoorcar.Dashboard;
 import com.noor.thenoorcar.DashboardMain;
 import com.noor.thenoorcar.Function.ScreenUtils;
 import com.noor.thenoorcar.R;
@@ -68,9 +70,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import wseemann.media.FFmpegMediaPlayer;
+
 
 
 
@@ -133,12 +137,20 @@ public class AlquranFragment extends Fragment {
     public static SimpleExoPlayer exoPlayer;
     public static Activity activitys;
 
+    public static String status_play_radio;
+
     LinearLayout linear_player, linear_surah, back_surah, click_me;
     RelativeLayout bg_shade;
     /*LottieAnimationView lottieAnimationView_wave, lottieAnimationView_wave2;*/
     String statusPlayAnimation = "";
-    String back_status = "1";
+
     ImageView icon_menu_back;
+    private static final int FORWARD_DELAY = 700;
+    private static final int BACKWARD_DELAY = 500;
+    private static final int MAX_SURAH_INDEX = 113;
+
+
+
 
 
 
@@ -179,40 +191,39 @@ public class AlquranFragment extends Fragment {
         imageView_shuffle = v.findViewById(R.id.imageView_shuffle);
         linear_player = v.findViewById(R.id.linear_player);
         linear_surah = v.findViewById(R.id.linear_surah);
-
-
+        icon_menu_back = v.findViewById(R.id.icon_menu_back);
         click_me = v.findViewById(R.id.click_me);
 
+
+        linear_surah.setVisibility(View.GONE);
+       /* bg_shade.setVisibility(View.GONE);*/
+        //END DECLARE LOADING
         click_me.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 linear_surah.setVisibility(View.VISIBLE);
-              /*  bg_shade.setVisibility(View.VISIBLE);*/
-                back_status="";
-                  /*  if(back_status.equals("1")){
-                        Animation slideIn = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_left);
-                        linear_surah.startAnimation(slideIn);
-                        linear_player.startAnimation(slideIn);
-                        bg_shade.startAnimation(slideIn);
-                        linear_surah.setVisibility(View.VISIBLE);
-                        bg_shade.setVisibility(View.VISIBLE);
-                        back_status="";
-
-                    }else{
-                        Animation slideOut = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_left);
-                        bg_shade.startAnimation(slideOut);
-                        bg_shade.setVisibility(View.GONE);
-                        linear_player.startAnimation(slideOut);
-                        linear_surah.startAnimation(slideOut);
-                        linear_surah.setVisibility(View.GONE);
-                        back_status="1";
-                    }*/
-
-
-
 
             }
+
+
         });
+
+        icon_menu_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (linear_surah.getVisibility() == View.VISIBLE) {
+                    linear_surah.setVisibility(View.GONE);
+                } else {
+                    Intent intent = new Intent(getActivity(), Dashboard.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+
+
+
 
         loadingDialog = new LoadingDialog(getContext());
         loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -362,56 +373,22 @@ public class AlquranFragment extends Fragment {
         imageView_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (surah_play_right_now != -1) {
-                    if (surah_play_right_now == 113) {
-                    } else {
-                        status_play_surah = "3";
-                        sv.setQuery("", false);
-                        sv.clearFocus();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                ((LinearLayoutManager) rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now + 1, 0);
+                if (surah_play_right_now != -1 && surah_play_right_now != MAX_SURAH_INDEX) {
+                    status_play_surah = "3";
+                    sv.setQuery("", false);
+                    sv.clearFocus();
 
-                                ImageView imageView_plays = null;
-                                LinearLayout linear_selected_surah = null;
-                                View views = null;
+                    new Handler().postDelayed(() -> {
+                        ((LinearLayoutManager) rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now + 1, 0);
+                        performActionIfViewHolderExists(surah_play_right_now, view -> {
+                            view.findViewById(R.id.imageView_play).setVisibility(View.INVISIBLE);
+                            view.findViewById(R.id.linear_selected_surah).setVisibility(View.INVISIBLE);
+                        });
 
-                                if (rv.findViewHolderForAdapterPosition(surah_play_right_now) == null) {
-
-                                } else {
-                                    views = rv.findViewHolderForAdapterPosition(surah_play_right_now).itemView;
-                                    imageView_plays = views.findViewById(R.id.imageView_play);
-                                    linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
-                                    imageView_plays.setVisibility(View.INVISIBLE);
-                                    linear_selected_surah.setVisibility(View.INVISIBLE);
-                                }
-
-
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (rv.findViewHolderForAdapterPosition(surah_play_right_now + 1) != null) {
-                                            rv.findViewHolderForAdapterPosition(surah_play_right_now + 1).itemView.performClick();
-                                        }
-
-                                        ImageView imageView_plays = null;
-                                        View views = null;
-
-//                                        if(rv.findViewHolderForAdapterPosition(surah_play_right_now+1) == null){
-//
-//                                        }else{
-//                                            views = rv.findViewHolderForAdapterPosition(surah_play_right_now+1).itemView;
-//                                            imageView_plays = views.findViewById(R.id.imageView_play);
-//                                            imageView_plays.setVisibility(View.VISIBLE);
-//                                        }
-                                    }
-                                }, 500);
-                            }
-                        }, 700);
-
-
-                    }
+                        new Handler().postDelayed(() -> {
+                            performActionIfViewHolderExists(surah_play_right_now + 1, View::performClick);
+                        }, BACKWARD_DELAY);
+                    }, FORWARD_DELAY);
                 }
             }
         });
@@ -428,39 +405,18 @@ public class AlquranFragment extends Fragment {
         imageView_backward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(surah_play_right_now != -1){
-                    if(surah_play_right_now == 0){
-                    }else{
-                        status_play_surah = "4";
-                        sv.setQuery("", false);
-                        sv.clearFocus();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                ((LinearLayoutManager)rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now-1,0);
+                if (surah_play_right_now > 0) {
+                    status_play_surah = "4";
+                    sv.setQuery("", false);
+                    sv.clearFocus();
 
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if(rv.findViewHolderForAdapterPosition(surah_play_right_now-1) !=null){
-                                            rv.findViewHolderForAdapterPosition(surah_play_right_now-1).itemView.performClick();
-                                        }
+                    new Handler().postDelayed(() -> {
+                        ((LinearLayoutManager) rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now - 1, 0);
 
-//                                        ImageView imageView_plays = null;
-//                                        View views = null;
-//
-//                                        if(rv.findViewHolderForAdapterPosition(surah_play_right_now-1) == null){
-//
-//                                        }else{
-//                                            views = rv.findViewHolderForAdapterPosition(surah_play_right_now-1).itemView;
-//                                            imageView_plays = views.findViewById(R.id.imageView_play);
-//                                            imageView_plays.setVisibility(View.VISIBLE);
-//                                        }
-                                    }
-                                }, 500);
-                            }
-                        }, 700);
-                    }
+                        new Handler().postDelayed(() -> {
+                            performActionIfViewHolderExists(surah_play_right_now - 1, View::performClick);
+                        }, BACKWARD_DELAY);
+                    }, FORWARD_DELAY);
                 }
             }
         });
@@ -469,89 +425,41 @@ public class AlquranFragment extends Fragment {
         imageView_play_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(status_play_surah.equals("1")){
-                    if(yourCountDownTimer != null){
+                Drawable big_icon;
+
+
+                if (status_play_surah.equals("1")) {
+                    if (yourCountDownTimer != null) {
                         yourCountDownTimer.cancel();
                     }
                     mPlayer.pause();
                     status_play_surah = "2";
-                    Drawable big_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.play_iconv2);
-                    imageView_play_pause.setImageDrawable(big_icon);
-
-                    ((LinearLayoutManager)rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now,0);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ImageView imageView_plays = null;
-                            LinearLayout linear_selected_surah = null;
-                            View views = null;
-                            if(rv.findViewHolderForAdapterPosition(surah_play_right_now) == null){
-                            }else{
-                                views = rv.findViewHolderForAdapterPosition(surah_play_right_now).itemView;
-                                imageView_plays = views.findViewById(R.id.imageView_play);
-                                linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
-                                Drawable pause_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.play_iconv2);
-                                imageView_plays.setImageDrawable(pause_icon);
-                                imageView_plays.setVisibility(View.VISIBLE);
-                                linear_selected_surah.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }, 700);
-                }else if(status_play_surah.equals("2")){
-                    if(yourCountDownTimer != null){
+                    big_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.play_iconv2);
+                } else if (status_play_surah.equals("2")) {
+                    if (yourCountDownTimer != null) {
                         yourCountDownTimer.start();
                     }
-                    mPlayer.start();  // This is the equivalent of exoPlayer.setPlayWhenReady(true);
+                    mPlayer.start();
                     status_play_surah = "1";
-                    Drawable big_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.pause_icon);
-                    imageView_play_pause.setImageDrawable(big_icon);
-
-                    ((LinearLayoutManager)rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now,0);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ImageView imageView_plays = null;
-                            LinearLayout linear_selected_surah = null;
-                            View views = null;
-                            if(rv.findViewHolderForAdapterPosition(surah_play_right_now) == null){
-                            }else{
-                                views = rv.findViewHolderForAdapterPosition(surah_play_right_now).itemView;
-                                imageView_plays = views.findViewById(R.id.imageView_play);
-                                linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
-                                Drawable pause_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.pause_icon);
-                                imageView_plays.setImageDrawable(pause_icon);
-                                imageView_plays.setVisibility(View.VISIBLE);
-                                linear_selected_surah.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }, 700);
-                }else if(status_play_surah.equals("0")){
-
-                    PlaySurah("1");  // I'm assuming PlaySurah method will handle the mPlayer initialization and start
+                    big_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.pause_icon);
+                } else { // Assuming "0"
+                    PlaySurah("1");
                     current_play_position = 0;
-                    Drawable big_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.pause_icon);
-                    imageView_play_pause.setImageDrawable(big_icon);
 
-                    ((LinearLayoutManager)rv.getLayoutManager()).scrollToPositionWithOffset(0,0);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ImageView imageView_plays = null;
-                            LinearLayout linear_selected_surah = null;
-                            View views = null;
-                            if(rv.findViewHolderForAdapterPosition(0) == null){
-                            }else{
-                                views = rv.findViewHolderForAdapterPosition(0).itemView;
-                                imageView_plays = views.findViewById(R.id.imageView_play);
-                                linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
-                                Drawable pause_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.pause_icon);
-                                imageView_plays.setImageDrawable(pause_icon);
-                                imageView_plays.setVisibility(View.VISIBLE);
-                                linear_selected_surah.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }, 700);
+                    big_icon = AlquranFragmentCtx.getResources().getDrawable(R.drawable.pause_icon);
                 }
+                imageView_play_pause.setImageDrawable(big_icon);
+
+                ((LinearLayoutManager) rv.getLayoutManager()).scrollToPositionWithOffset(surah_play_right_now, 0);
+                new Handler().postDelayed(() -> {
+                    performActionIfViewHolderExists(surah_play_right_now, view -> {
+                        ImageView imageView_plays = view.findViewById(R.id.imageView_play);
+                        LinearLayout linear_selected_surah = view.findViewById(R.id.linear_selected_surah);
+                        imageView_plays.setImageDrawable(big_icon);
+                        imageView_plays.setVisibility(View.VISIBLE);
+                        linear_selected_surah.setVisibility(View.VISIBLE);
+                    });
+                }, FORWARD_DELAY);
             }
         });
 
@@ -1104,6 +1012,15 @@ public class AlquranFragment extends Fragment {
         finalTimerString = finalTimerString + minutesString + ":" + secondsString;
 
         return finalTimerString;
+    }
+
+    private void performActionIfViewHolderExists(int position, Consumer<View> action) {
+        RecyclerView.ViewHolder viewHolder = rv.findViewHolderForAdapterPosition(position);
+        if (viewHolder != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                action.accept(viewHolder.itemView);
+            }
+        }
     }
 
 

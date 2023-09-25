@@ -2,11 +2,11 @@ package com.noor.thenoorcar.Fragment;
 
 import static android.content.ContentValues.TAG;
 import static com.android.volley.Request.Method.GET;
-import static com.noor.thenoorcar.Dashboard.convertDateToNormal;
-import static com.noor.thenoorcar.Dashboard.convertDateToTime;
-import static com.noor.thenoorcar.Dashboard.convertDateToTime12hour;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 
@@ -24,8 +24,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -49,9 +47,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class PrayerTime extends Fragment {
@@ -183,6 +180,17 @@ public class PrayerTime extends Fragment {
                             SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm:ss");
                             Date todayDate = new Date();
                             String serverTime = currentDate.format(todayDate);
+                            Context context = getContext();
+                            if (context == null) {
+                                Log.e("PrayerFragment", "Fragment is not attached to an Activity.");
+                                return;
+                            }
+                            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                            if (alarmManager == null) {
+                                Log.e("PrayerFragment", "Failed to get AlarmManager.");
+                                return;
+                            }
+
 
                             for (int i = 0 ; i < array_waktu_solat.length(); i++){
                                 JSONObject prayerTime_obj = array_waktu_solat.getJSONObject(i);
@@ -226,7 +234,9 @@ public class PrayerTime extends Fragment {
                                     }
                                 }
 
-//                                }
+
+
+
                             }
 
 
@@ -252,6 +262,7 @@ public class PrayerTime extends Fragment {
     }
 
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -264,6 +275,7 @@ public class PrayerTime extends Fragment {
             Log.d(TAG, "getLocation: " + gpsTracker.getLatitude() + " " + gpsTracker.getLongitude());
             fetchDataBasedOnLatLang(gpsTracker.getLatitude(), gpsTracker.getLongitude());
             fetchJsonData(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+
         } else {
             gpsTracker.showSettingsAlert();
         }
@@ -291,9 +303,9 @@ public class PrayerTime extends Fragment {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -344,9 +356,9 @@ public class PrayerTime extends Fragment {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -382,9 +394,9 @@ public class PrayerTime extends Fragment {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -419,9 +431,9 @@ public class PrayerTime extends Fragment {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 
@@ -457,9 +469,9 @@ public class PrayerTime extends Fragment {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
                 if(hours == 0){
-                    textView_countdown.setText( " in "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in "+ minutes + " Min " + seconds +" Sec");
                 }else if(hours!=0){
-                    textView_countdown.setText( " in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
+                    textView_countdown.setText( "in " + hours + " Hours "+ minutes + " Min " + seconds +" Sec");
 
                 }
 

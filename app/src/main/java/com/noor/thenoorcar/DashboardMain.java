@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.noor.thenoorcar.Fragment.AlquranFragment;
-import com.noor.thenoorcar.Fragment.AlquranFragmentV2;
 import com.noor.thenoorcar.Fragment.AsmaFragment;
 import com.noor.thenoorcar.Fragment.CompassFragment;
 import com.noor.thenoorcar.Fragment.LocationFragment;
