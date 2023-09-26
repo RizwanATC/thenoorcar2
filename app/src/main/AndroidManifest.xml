@@ -49,16 +49,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/Theme.Thenoorcar" />
 
-        <service
-            android:name=".Service.AlarmForegroundService"
-            android:enabled="true"
-            android:exported="false" />
-
-        <receiver android:name=".Service.AlarmReceiver" android:enabled="true" android:exported="true">
-            <intent-filter>
-                <action android:name="com.yourapp.ALARM_TRIGGER" />
-            </intent-filter>
+        <receiver android:name=".Service.AlarmReceiver" android:exported="false">
         </receiver>
+
 
 
 

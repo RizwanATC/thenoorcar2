@@ -37,7 +37,9 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends AppCompatActivity {
@@ -152,9 +154,9 @@ public class Dashboard extends AppCompatActivity {
         im_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent next = new Intent(getApplicationContext(), Setting.class);
-                startActivity(next);*/
-                triggerAlarm();
+                Intent next = new Intent(getApplicationContext(), Setting.class);
+                startActivity(next);
+
             }
         });
 
@@ -167,22 +169,7 @@ public class Dashboard extends AppCompatActivity {
         getLocation();
     }
 
-    private void triggerAlarm() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-        // Trigger the alarm immediately
-        if (alarmManager != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
-            } else {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
-            }
-        }
-    }
 
 
     private void fetchJsonData(double latitude ,double longitude) {
@@ -197,9 +184,16 @@ public class Dashboard extends AppCompatActivity {
                             SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm:ss");
                             Date todayDate = new Date();
                             String serverTime = currentDate.format(todayDate);
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
                             for (int i = 0 ; i < array_waktu_solat.length(); i++){
                                 JSONObject prayerTime_obj = array_waktu_solat.getJSONObject(i);
+
+                                schedulePrayerAlarm("Fajr", prayerTime_obj.getString("subuh"));
+                                schedulePrayerAlarm("Dhuhr", prayerTime_obj.getString("zohor"));
+                                schedulePrayerAlarm("Asr", prayerTime_obj.getString("asar"));
+                                schedulePrayerAlarm("Maghrib", prayerTime_obj.getString("maghrib"));
+                                schedulePrayerAlarm("Isha", prayerTime_obj.getString("isyak"));
 
                                 boolean fajr = checktimings(serverTime,convertDate(prayerTime_obj.getString("subuh")));
                                 if(fajr){
@@ -207,7 +201,7 @@ public class Dashboard extends AppCompatActivity {
                                     txt_prayer.setText("Subuh");
                                     countdownSubuh(serverTime,prayerTime_obj);
                                     azantime="Azan Subuh";
-                                    triggerAlarm();
+                                    /*triggerAlarm();*/
                                 }else{
                                     boolean syuruk = checktimings(serverTime,convertDate(prayerTime_obj.getString("syuruk")));
                                     if(syuruk){
@@ -220,7 +214,7 @@ public class Dashboard extends AppCompatActivity {
                                             txt_prayer.setText("Zohor");
                                             countdownZohor(serverTime,prayerTime_obj);
                                             azantime="Azan Zohor";
-                                            triggerAlarm();
+                                            /*triggerAlarm();*/
                                         }else{
                                             boolean asr = checktimings(serverTime,convertDate(prayerTime_obj.getString("asar")));
                                             if(asr){
@@ -228,7 +222,7 @@ public class Dashboard extends AppCompatActivity {
                                                 txt_prayer.setText("Asar");
                                                 countdownAsar(serverTime,prayerTime_obj);
                                                 azantime="Azan Asar";
-                                                triggerAlarm();
+                                                /*triggerAlarm();*/
                                             }else{
                                                 boolean maghrib = checktimings(serverTime,convertDate(prayerTime_obj.getString("maghrib")));
                                                 if(maghrib){
@@ -236,7 +230,7 @@ public class Dashboard extends AppCompatActivity {
                                                     txt_prayer.setText("Maghrib");
                                                     countdownMargrib(serverTime,prayerTime_obj);
                                                     azantime="Azan Maghrib";
-                                                    triggerAlarm();
+                                                    /*triggerAlarm();*/
                                                 }else{
                                                     boolean isha = checktimings(serverTime,convertDate(prayerTime_obj.getString("isyak")));
                                                     if(isha){
@@ -244,7 +238,7 @@ public class Dashboard extends AppCompatActivity {
                                                         txt_prayer.setText("Isyak");
                                                         countdownIsyak(serverTime,prayerTime_obj);
                                                         azantime="Azan Isyak";
-                                                        triggerAlarm();
+                                                        /*triggerAlarm();*/
                                                     }else{
                                                         /*getPrayertimeTomorrow(serverTime,latitude,longitude);*/
                                                     }
@@ -278,6 +272,42 @@ public class Dashboard extends AppCompatActivity {
 
         mRequestQueue.add(request);
     }
+
+
+    private void schedulePrayerAlarm(String prayerName, String prayerTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            Date date = sdf.parse(prayerTime);
+            if (date != null) {
+                long timeInMillis = date.getTime();
+                // Check if the prayer time is in the future
+                if (timeInMillis > System.currentTimeMillis()) {
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(this, AlarmReceiver.class);
+                    intent.putExtra("prayer", prayerName);
+                    PendingIntent pendingIntent;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        pendingIntent = PendingIntent.getBroadcast(this, prayerName.hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
+                    } else {
+                        pendingIntent = PendingIntent.getBroadcast(this, prayerName.hashCode(), intent, 0);
+                    }
+                    if (alarmManager != null) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+                        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+                        } else {
+                            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+                        }
+                    }
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void countdownSubuh(String serverTime, JSONObject objectArr) throws ParseException, JSONException {
         long start_millis = convertTimetoMili(serverTime); //get the start time in milliseconds
         long end_millis = convertTimetoMili(convertDate(objectArr.getString("subuh"))); //get the end time in milliseconds

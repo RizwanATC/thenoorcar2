@@ -1,5 +1,7 @@
 package com.noor.thenoorcar;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,6 +68,16 @@ public class Setting extends AppCompatActivity {
         playIcons.add(play_icon4);
         playIcons.add(play_icon5);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("azanPref", Context.MODE_PRIVATE);
+
+// Retrieve the value using the key "selected_azan"
+        String selectedAzan = sharedPreferences.getString("selected_azan", "");
+
+// Check if a value exists
+        if (!selectedAzan.isEmpty()) {
+            selected_azan.setText(selectedAzan);
+        }
+
         image_check_satu.setVisibility(View.VISIBLE);
         image_check_dua.setVisibility(View.GONE);
         linear_language.setOnClickListener(new View.OnClickListener() {
@@ -107,42 +119,74 @@ public class Setting extends AppCompatActivity {
 
 
 
+        // Create a SharedPreferences object
+
+
         linear_azan_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selected_azan.setText("Akbar Azmi");
                 select_azan_reciter.setVisibility(View.GONE);
 
+                // Save the selected value with the same key
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("selected_azan", "Akbar Azmi");
+                editor.apply();
             }
         });
+
         linear_azan_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selected_azan.setText("Sheikh Idris Sulaiman");
                 select_azan_reciter.setVisibility(View.GONE);
+
+                // Save the selected value with the same key
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("selected_azan", "Sheikh Idris Sulaiman");
+                editor.apply();
             }
         });
+
         linear_azan_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selected_azan.setText("Yassin Sulaiman");
                 select_azan_reciter.setVisibility(View.GONE);
+
+                // Save the selected value with the same key
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("selected_azan", "Yassin Sulaiman");
+                editor.apply();
             }
         });
+
         linear_azan_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selected_azan.setText("Teuku Wisnu");
                 select_azan_reciter.setVisibility(View.GONE);
+
+                // Save the selected value with the same key
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("selected_azan", "Teuku Wisnu");
+                editor.apply();
             }
         });
+
         linear_azan_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selected_azan.setText("Ridjaal Ahmed");
                 select_azan_reciter.setVisibility(View.GONE);
+
+                // Save the selected value with the same key
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("selected_azan", "Ridjaal Ahmed");
+                editor.apply();
             }
         });
+
 
 
         play_icon1.setOnClickListener(view -> playAudio(R.raw.azan_akhbar, play_icon1));
