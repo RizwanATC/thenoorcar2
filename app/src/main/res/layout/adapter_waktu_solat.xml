@@ -92,8 +92,8 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_zohor" />
+                            android:layout_height="120dp"
+                            android:src="@drawable/icon_subuh" />
                         <TextView
                             android:includeFontPadding="false"
                             android:text="Subuh"
@@ -133,7 +133,7 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="120dp"
                             android:src="@drawable/icon_zohor" />
                         <TextView
                             android:includeFontPadding="false"
@@ -174,8 +174,8 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_zohor" />
+                            android:layout_height="120dp"
+                            android:src="@drawable/icon_asar" />
                         <TextView
                             android:includeFontPadding="false"
                             android:text="Asar"
@@ -215,8 +215,8 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_zohor" />
+                            android:layout_height="120dp"
+                            android:src="@drawable/icon_maghrib" />
                         <TextView
                             android:includeFontPadding="false"
                             android:text="Maghrib"
@@ -257,8 +257,8 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_zohor" />
+                            android:layout_height="120dp"
+                            android:src="@drawable/icon_isya" />
                         <TextView
                             android:includeFontPadding="false"
                             android:text="Isyak"

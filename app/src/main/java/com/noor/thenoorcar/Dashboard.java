@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,6 +62,10 @@ public class Dashboard extends AppCompatActivity {
         int screenWidth = screenSize.x;
         int screenHeight = screenSize.y; // If needed
 
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        String lang = prefs.getString("My_Lang", "en"); // Load saved language, default to English if not found
+        setLocale(lang);
+
         // Choose the layout based on the screen width
         int layoutResId = (screenWidth == 1920) ? R.layout.activity_dashboard : R.layout.activity_dashboard_large;
 
@@ -78,10 +83,6 @@ public class Dashboard extends AppCompatActivity {
         im_setting = findViewById(R.id.im_setting);
 
         mRequestQueue = Volley.newRequestQueue(this);
-
-
-
-
 
 
         SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
@@ -194,6 +195,16 @@ public class Dashboard extends AppCompatActivity {
                                 schedulePrayerAlarm("Asr", prayerTime_obj.getString("asar"));
                                 schedulePrayerAlarm("Maghrib", prayerTime_obj.getString("maghrib"));
                                 schedulePrayerAlarm("Isha", prayerTime_obj.getString("isyak"));
+
+                                SharedPreferences prefs = getSharedPreferences("PrayerTimes", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("Fajr", prayerTime_obj.getString("subuh"));
+                                editor.putString("Dhuhr", prayerTime_obj.getString("zohor"));
+                                editor.putString("Asar", prayerTime_obj.getString("asar"));
+                                editor.putString("Maghrib", prayerTime_obj.getString("maghrib"));
+                                editor.putString("Isha", prayerTime_obj.getString("isyak"));
+
+                                editor.apply();
 
                                 boolean fajr = checktimings(serverTime,convertDate(prayerTime_obj.getString("subuh")));
                                 if(fajr){
@@ -601,6 +612,17 @@ public class Dashboard extends AppCompatActivity {
         }
 
         return output;
+    }
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
+        // You might or might not want to recreate the activity here, depending on your use case
+
     }
 
 

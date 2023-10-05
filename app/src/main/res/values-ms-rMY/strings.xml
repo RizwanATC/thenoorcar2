@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">thenoorcar</string>
+    <string name="title_activity_dashboard">Papan Pemuka</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Fragmen Pertama</string>
+    <string name="second_fragment_label">Fragmen Kedua</string>
+    <string name="previous">Sebelumnya</string>
+    <string name="quran">Pemain Quran</string>
+    <string name="infinite">Infinite</string>
+    <string name="prayer">Waktu Solat</string>
+    <string name="location">Masjid</string>
+    <string name="compass">Kompas</string>
+    <string name="name99">99 Nama</string>
+    <string name="applicationLang">Bahasa Aplikasi</string>
+    <string name="azanNotfication">Audio Notifikasi Azan</string>
+    <string name="setting">Tetapan</string>
+    <string name="nextPrayer">Waktu Solat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hai fragmen kosong</string>
+    <string name="pause">Jeda</string>
+    <string name="play">Main</string>
+    <string name="restart">Mulai Semula</string>
+
+    <string name="next">Seterusnya</string>
+
+
+
+
+</resources>

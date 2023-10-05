@@ -1,7 +1,9 @@
 package com.noor.thenoorcar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Setting extends AppCompatActivity {
 
@@ -94,28 +97,60 @@ public class Setting extends AppCompatActivity {
             }
         });
 
+
+
         linier_bahasa_satu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Save selected language to SharedPreferences
+                SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("My_Lang", "ms");
+                editor.apply();
+
+                // Set Locale and Update UI elements
+                setLocale("ms");
                 bahasa = "1";
                 image_check_satu.setVisibility(View.VISIBLE);
                 image_check_dua.setVisibility(View.GONE);
                 seleected_bahasa.setText("Bahasa Melayu");
                 select_bahasa_linear.setVisibility(View.GONE);
 
+                // Restart MainActivity
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
         });
+
         linier_bahasa_dua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bahasa = "1";
+                // Save selected language to SharedPreferences
+                SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("My_Lang", "en");
+                editor.apply();
+
+                // Set Locale and Update UI elements
+                setLocale("en");
+                bahasa = "2";
                 image_check_satu.setVisibility(View.GONE);
                 image_check_dua.setVisibility(View.VISIBLE);
                 seleected_bahasa.setText("English");
                 select_bahasa_linear.setVisibility(View.GONE);
 
+                // Restart MainActivity
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
         });
+
+
+
 
 
 
@@ -234,5 +269,14 @@ public class Setting extends AppCompatActivity {
             exoPlayer.release();
             exoPlayer = null;
         }
+    }
+
+    public void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
     }
 }

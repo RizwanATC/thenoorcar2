@@ -63,7 +63,7 @@ public class RadioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!mediaPlayer.isPlaying()) {
-                    AlquranFragment.mPlayer.stop();
+
                     playAudio();
                     getTitle();
                 } else {
