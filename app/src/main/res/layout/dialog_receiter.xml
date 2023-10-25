@@ -6,21 +6,23 @@
     android:background="@drawable/custom_dialog_receiter"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingTop="5dp"
-    android:paddingBottom="50dp">
+    android:paddingTop="5dp">
 
     <TextView
+        android:fontFamily="@font/avenirblack"
+        android:text="Select Reciter"
         android:id="@+id/textView_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:textColor="@color/colorFontonboarding"
-        android:textSize="18dp" />
+        android:textColor="@color/black"
+        android:textSize="24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_reciter_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
 </LinearLayout>

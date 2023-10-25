@@ -49,6 +49,7 @@ import com.noor.thenoorcar.Adapter.MosqueAdapter;
 import com.noor.thenoorcar.Class.Compass;
 import com.noor.thenoorcar.Class.MosqueClass;
 import com.noor.thenoorcar.Common.PreferenceManagerMosqueLocation;
+import com.noor.thenoorcar.Dashboard;
 import com.noor.thenoorcar.DashboardMain;
 import com.noor.thenoorcar.Function.GpsTracker;
 import com.noor.thenoorcar.Function.ScreenUtils;
@@ -143,6 +144,15 @@ public class CompassFragment extends Fragment {
         textView_location = v.findViewById(R.id.textView_location_compass);
         textView_degree = v.findViewById(R.id.textView_degree_compass);
         textView_degree_current = v.findViewById(R.id.textView_degree_current);
+        icon_menu_back = v.findViewById(R.id.icon_menu_back);
+        icon_menu_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Dashboard.class);
+                startActivity(intent);
+
+            }
+        });
 
         getLocation();
 

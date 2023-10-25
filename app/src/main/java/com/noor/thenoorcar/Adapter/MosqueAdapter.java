@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.RemoteException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.malaysia.openapi.Navi;
 import com.noor.thenoorcar.Class.MosqueClass;
 import com.noor.thenoorcar.R;
 
@@ -65,40 +67,19 @@ public class MosqueAdapter extends RecyclerView.Adapter<MosqueAdapter.MyViewHold
         final String strUri = "http://maps.google.com/maps?q=loc:" + menu.getLatitude() + "," + menu.getLongitude() + " (" +menu.getName()+ ")";
 
 
-       /* Navi navi = new Navi(activity.getApplicationContext());
+        Navi navi = new Navi(activity.getApplicationContext());
 
         holder.textView_distance.setText(String.format("%.1f",Double.parseDouble(menu.getDistance())));
 
         holder.imageView_google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navi.reqNaviToPoi("Penang", "Penang", Double.parseDouble(menu.getLongitude()), Double.parseDouble(menu.getLatitude()));
-                *//* PackageManager pm = activity.getPackageManager();
-                boolean isInstalled = isPackageInstalled("com.google.android.apps.maps", pm);
-                if(isInstalled){
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(strUri));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                    activity.startActivity(intent);
-                }else{
-
-                }*//*
-            }
-        });*/
-
-        holder.imageView_waze.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PackageManager pm = activity.getPackageManager();
-                boolean isInstalled = isPackageInstalled("com.waze", pm);
-                if(isInstalled){
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(strUri));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setPackage("com.waze");
-                    activity.startActivity(intent);
-                }else{
-
+                try {
+                    navi.reqNaviToPoi("Penang", "Penang", Double.parseDouble(menu.getLongitude()), Double.parseDouble(menu.getLatitude()));
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
                 }
+
             }
         });
     }

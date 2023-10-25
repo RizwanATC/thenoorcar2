@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
+import com.noor.thenoorcar.DashboardMain;
 import com.noor.thenoorcar.R;
 
 import java.util.HashMap;
@@ -62,16 +63,24 @@ public class AlarmReceiver extends BroadcastReceiver {
         stopSoundIntent.setAction(ACTION_STOP_SOUND);
         PendingIntent stopSoundPendingIntent = PendingIntent.getBroadcast(context, 0, stopSoundIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
+        // Create an intent to open the PrayerActivity when the notification is clicked
+        Intent openActivityIntent = new Intent(context, DashboardMain.class);
+        openActivityIntent.putExtra("SHOW_PRAYER_FRAGMENT", true);
+        PendingIntent openActivityPendingIntent = PendingIntent.getActivity(context, 0, openActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentTitle("Prayer Time Reminder")
-                .setContentText("It's time for " + prayer + " prayer")
+                .setContentTitle("It's "+prayer+" time")
+                .setContentText("Click to open nearest Mosque")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
+                .setContentIntent(openActivityPendingIntent) // Set the intent to open the Activity
                 .addAction(R.drawable.pause_icon, "Stop Sound", stopSoundPendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(prayer.hashCode(), builder.build());
     }
+
 
     private void playAzanSound(Context context, SharedPreferences prefs) {
         Map<String, Integer> azanSounds = new HashMap<>();
@@ -81,7 +90,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         azanSounds.put("Teuku Wisnu", R.raw.azan_teuku);
         azanSounds.put("Ridjaal Ahmed", R.raw.ridjal_azan);
 
-        String selectedAzan = prefs.getString("selected_azan", "");
+        // Setting "Akbar Azmi" as the default azan sound
+        String selectedAzan = prefs.getString("selected_azan", "Akbar Azmi");
 
         if (azanSounds.containsKey(selectedAzan)) {
             stopMediaPlayer(); // Ensure previous sound is stopped
@@ -96,6 +106,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             mediaPlayer.start();
         }
     }
+
 
     private void stopMediaPlayer() {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
