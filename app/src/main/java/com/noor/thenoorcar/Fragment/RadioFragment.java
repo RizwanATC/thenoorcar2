@@ -2,6 +2,7 @@ package com.noor.thenoorcar.Fragment;
 
 import static com.android.volley.Request.Method.GET;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaMetadata;
@@ -10,12 +11,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -24,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.noor.thenoorcar.Dashboard;
 import com.noor.thenoorcar.Function.ScreenUtils;
 import com.noor.thenoorcar.R;
 
@@ -41,6 +46,7 @@ public class RadioFragment extends Fragment {
     TextView textView_title_playing;
     private MediaPlayer mediaPlayer;
     private boolean isPlaying = false;
+    ImageView icon_menu_back;
 
 
     public static MediaSessionCompat mMediaSession;
@@ -53,24 +59,50 @@ public class RadioFragment extends Fragment {
         int screenHeight = screenSize.y;
         int layoutResId = (screenWidth == 1920) ? R.layout.fragment_radio : R.layout.fragment_radio_large;
         View v = inflater.inflate(layoutResId, container, false);
-
+        final ProgressBar progressBar = v.findViewById(R.id.progressBar);
+        final View dimBackground = v.findViewById(R.id.dimBackground);
         imageView_play = v.findViewById(R.id.imageView_play);
         textView_title_playing =v.findViewById(R.id.textView_title_playing);
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
+
         imageView_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mediaPlayer.isPlaying()) {
-
-                    playAudio();
-                    getTitle();
-                } else {
+                // If the mediaPlayer is already playing, stop it
+                if (mediaPlayer.isPlaying()) {
                     stopAudio();
                 }
+
+                // Show the progressBar and dim background
+                progressBar.setVisibility(View.VISIBLE);
+                dimBackground.setVisibility(View.VISIBLE);
+
+                // Start playing the audio
+                playAudio();
+                getTitle();
+
+                // Set a delay of 8 seconds to hide the progressBar and dim background
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        dimBackground.setVisibility(View.GONE);
+                    }
+                }, 8000);  // 8000 milliseconds = 8 seconds
             }
         });
+        icon_menu_back = v.findViewById(R.id.icon_menu_back);
+        icon_menu_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Dashboard.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         return v;
     }

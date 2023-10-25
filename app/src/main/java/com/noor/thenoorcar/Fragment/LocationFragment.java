@@ -2,6 +2,7 @@ package com.noor.thenoorcar.Fragment;
 
 import static com.android.volley.Request.Method.GET;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.noor.thenoorcar.Adapter.MosqueAdapter;
 import com.noor.thenoorcar.Class.MosqueClass;
+import com.noor.thenoorcar.Dashboard;
 import com.noor.thenoorcar.Function.GpsTracker;
 import com.noor.thenoorcar.Function.ScreenUtils;
 import com.noor.thenoorcar.R;
@@ -41,7 +44,7 @@ public class LocationFragment extends Fragment {
     RecyclerView rv;
     private MosqueAdapter mosqueAdapter;
     int radius = 5000;
-
+    ImageView icon_menu_back;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +56,15 @@ public class LocationFragment extends Fragment {
 
         View v = inflater.inflate(layoutResId, container, false);
         rv = v.findViewById(R.id.rv);
+        icon_menu_back = v.findViewById(R.id.icon_menu_back);
+        icon_menu_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Dashboard.class);
+                startActivity(intent);
+
+            }
+        });
         getLocationAsk();
 
      return v;

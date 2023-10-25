@@ -91,7 +91,7 @@ public class WaktuSolatAdapter extends RecyclerView.Adapter<WaktuSolatAdapter.Wa
                     Calendar currentCalendar = Calendar.getInstance();
                     currentTime = timeFormat.parse(timeFormat.format(currentCalendar.getTime()));
 
-                    Typeface typeface = context.getResources().getFont(R.font.avenirblack);
+                    Typeface        typeface = context.getResources().getFont(R.font.avenirblack);
                     if (currentTime.after(timeSubuh) && currentTime.before(timeZuhur)) {
                         holder.zohor.setTypeface(typeface);
                         holder.waktuzohor.setTypeface(typeface);

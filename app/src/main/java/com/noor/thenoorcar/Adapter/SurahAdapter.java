@@ -91,7 +91,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
                         views_2 = mRecyclerList.findViewHolderForAdapterPosition(getAdapterPosition()).itemView;
                         imageView_plays_2 = views_2.findViewById(R.id.imageView_play);
                         linear_selected_surah = views_2.findViewById(R.id.linear_selected_surah);
-                        Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                        Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                         imageView_plays_2.setImageDrawable(pause_icon);
                         imageView_plays_2.setVisibility(View.VISIBLE);
                         linear_selected_surah.setVisibility(View.VISIBLE);
@@ -105,7 +105,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
                             views = mRecyclerList.findViewHolderForAdapterPosition(current_play_position).itemView;
                             imageView_plays = views.findViewById(R.id.imageView_play);
                             linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
-                            Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                            Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                             imageView_plays.setImageDrawable(pause_icon);
                             imageView_plays.setVisibility(View.VISIBLE);
                             linear_selected_surah.setVisibility(View.VISIBLE);
@@ -119,7 +119,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
                                 views = mRecyclerList.findViewHolderForAdapterPosition(current_play_position).itemView;
                                 linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
                                 imageView_plays = views.findViewById(R.id.imageView_play);
-                                Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_play);
+                                Drawable pause_icon = activity.getResources().getDrawable(R.drawable.play_iconv2);
                                 imageView_plays.setImageDrawable(pause_icon);
                                 imageView_plays.setVisibility(View.VISIBLE);
                                 linear_selected_surah.setVisibility(View.VISIBLE);
@@ -135,7 +135,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
                                 views = mRecyclerList.findViewHolderForAdapterPosition(current_play_position).itemView;
                                 linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
                                 imageView_plays = views.findViewById(R.id.imageView_play);
-                                Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                                Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                                 imageView_plays.setImageDrawable(pause_icon);
                                 imageView_plays.setVisibility(View.VISIBLE);
                                 linear_selected_surah.setVisibility(View.VISIBLE);
@@ -150,7 +150,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
                             views = mRecyclerList.findViewHolderForAdapterPosition(current_play_position).itemView;
                             imageView_plays = views.findViewById(R.id.imageView_play);
                             linear_selected_surah = views.findViewById(R.id.linear_selected_surah);
-                            Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                            Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                             imageView_plays.setImageDrawable(pause_icon);
                             imageView_plays.setVisibility(View.VISIBLE);
                             linear_selected_surah.setVisibility(View.VISIBLE);
@@ -204,6 +204,8 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
 
         holder.textView_count.setText(menu.getNumber());
         holder.textView_nama_surah.setText(menu.getName());
+        holder.textView_nama_samaran.setText(menu.getEnglishName());
+
 
 
 
@@ -215,16 +217,16 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.MyViewHolder
         }else{
             if(current_play_surah_string.equals(menu.getName())){
                 if(AlquranFragment.status_play_surah.equals("1")){
-                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                     holder.imageView_play.setImageDrawable(pause_icon);
                 }else if(AlquranFragment.status_play_surah.equals("2")) {
-                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_play);
+                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.play_iconv2);
                     holder.imageView_play.setImageDrawable(pause_icon);
                 }else if(AlquranFragment.status_play_surah.equals("3")) {
-                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                     holder.imageView_play.setImageDrawable(pause_icon);
                 }else if(AlquranFragment.status_play_surah.equals("4")) {
-                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.icon_small_pause);
+                    Drawable pause_icon = activity.getResources().getDrawable(R.drawable.pause_icon);
                     holder.imageView_play.setImageDrawable(pause_icon);
                 }
                 holder.imageView_play.setVisibility(View.VISIBLE);

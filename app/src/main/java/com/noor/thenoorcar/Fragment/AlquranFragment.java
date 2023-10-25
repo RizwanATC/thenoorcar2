@@ -209,15 +209,13 @@ public class AlquranFragment extends Fragment {
 
         });
 
+        icon_menu_back = v.findViewById(R.id.icon_menu_back);
         icon_menu_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (linear_surah.getVisibility() == View.VISIBLE) {
-                    linear_surah.setVisibility(View.GONE);
-                } else {
-                    Intent intent = new Intent(getActivity(), Dashboard.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(getActivity(), Dashboard.class);
+                startActivity(intent);
+
             }
         });
 

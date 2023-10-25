@@ -300,7 +300,7 @@ public class AsmaFragment extends Fragment {
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reciterBuilder = new AlertDialog.Builder(getContext(),R.style.Theme_Thenoorcar);
+                reciterBuilder = new AlertDialog.Builder(getContext(),R.style.dialogReciterPlayer);
                 LayoutInflater inflater = getLayoutInflater();
                 View dialoglayout = inflater.inflate(R.layout.layout_asma_reciter_v2, null);
                 reciterBuilder.setView(dialoglayout);
@@ -312,27 +312,6 @@ public class AsmaFragment extends Fragment {
                 getReciterAsma(viewPager,dotsIndicator);
             }
         });
-
-        profile_image.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    reciterBuilder = new AlertDialog.Builder(getContext(),R.style.Theme_Thenoorcar);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View dialoglayout = inflater.inflate(R.layout.layout_asma_reciter_v2, null);
-                    reciterBuilder.setView(dialoglayout);
-                    reciterDialog = reciterBuilder.create();
-                    reciterDialog.setCancelable(true);
-
-                    ViewPager viewPager = dialoglayout.findViewById(R.id.viewPager);
-                    DotsIndicator dotsIndicator = dialoglayout.findViewById(R.id.dots_indicator);
-                    getReciterAsma(viewPager,dotsIndicator);
-                    return true;
-                }
-                return false;
-            }
-        });
-
         return v;
     }
 

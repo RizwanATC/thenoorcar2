@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -16,15 +15,14 @@
             android:id="@+id/linear_selected_surah"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:background="@drawable/silver_bg"
-            android:orientation="vertical"></LinearLayout>
-
-
+            android:orientation="vertical">
+        </LinearLayout>
         <LinearLayout
-            android:paddingRight="10dp"
-            android:weightSum="4"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -32,17 +30,16 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/textView_count"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
                     android:text="130"
                     android:textColor="@android:color/white"
-                    android:textSize="32dp" />
+                    android:textSize="28dp" />
 
 
             </LinearLayout>
@@ -53,13 +50,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/textView_nama_surah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="Al Fatihah"
                     android:textColor="@android:color/white"
-                    android:textSize="32dp" />
+                    android:textSize="28dp" />
 
                 <TextView
                     android:gravity="left"
@@ -69,7 +67,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="The opening (7)"
                     android:textColor="@android:color/white"
-                    android:textSize="26dp" />
+                    android:textSize="24dp" />
 
             </LinearLayout>
             <LinearLayout
@@ -87,13 +85,14 @@
 
             </LinearLayout>
             <LinearLayout
-                android:gravity="right|center_vertical"
+
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
+                    android:gravity="right"
                     android:id="@+id/textView_surah_arab"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:text="TextView"

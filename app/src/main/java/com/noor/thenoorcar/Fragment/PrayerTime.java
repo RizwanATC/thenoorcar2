@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.noor.thenoorcar.Adapter.WaktuSolatAdapter;
+import com.noor.thenoorcar.Dashboard;
 import com.noor.thenoorcar.Function.GpsTracker;
 import com.noor.thenoorcar.Function.ScreenUtils;
 import com.noor.thenoorcar.Function.SnapHelperOneByOne;
@@ -65,6 +66,7 @@ public class PrayerTime extends Fragment {
     private RequestQueue mRequestQueue;
     ConstraintLayout constraintSilver;
     ImageView backBtn,noorLogo,prev,next;
+    ImageView icon_menu_back;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +98,16 @@ public class PrayerTime extends Fragment {
 
         LinearSnapHelper linearSnapHelper = new SnapHelperOneByOne();
         linearSnapHelper.attachToRecyclerView(recycle_prayer);
+        icon_menu_back = v.findViewById(R.id.icon_menu_back);
+        icon_menu_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Dashboard.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         return v;
     }

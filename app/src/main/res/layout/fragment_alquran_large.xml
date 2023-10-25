@@ -80,10 +80,10 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="48dp"
                                 android:id="@+id/linear_player"
-                                android:layout_marginLeft="50dp"
-                                android:layout_marginRight="50dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="20dp"
                                 android:layout_weight="2"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -160,10 +160,10 @@
                                                         android:id="@+id/textView_receiter_name"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:fontFamily="@font/avenirheavy"
+                                                        android:fontFamily="@font/avenir"
                                                         android:text="Al-Muddaththir"
                                                         android:textColor="@android:color/white"
-                                                        android:textSize="32dp" />
+                                                        android:textSize="24dp" />
 
 
 
@@ -320,7 +320,7 @@
                                             <ImageView
                                                 android:id="@+id/imageView_play_pause"
                                                 android:layout_width="match_parent"
-                                                android:layout_height="250dp"
+                                                android:layout_height="200dp"
                                                 android:layout_weight="1"
                                                 app:srcCompat="@drawable/play_iconv2" />
 
@@ -366,6 +366,7 @@
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal">
                                         <TextView
+                                            android:layout_marginLeft="16dp"
                                             android:id="@+id/textView_begining"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -374,6 +375,7 @@
                                             android:textColor="#B7B7B7"
                                             android:textSize="24dp" />
                                         <TextView
+                                            android:layout_marginRight="16dp"
                                             android:id="@+id/textView_audio_length"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -404,7 +406,9 @@
 
                             </LinearLayout>
                             <LinearLayout
-                                android:visibility="gone"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginTop="24dp"
+                                android:visibility="visible"
                                 android:id="@+id/linear_surah"
                                 android:layout_marginLeft="50dp"
                                 android:layout_weight="2"
@@ -419,19 +423,20 @@
                                     <TextView
                                         android:id="@+id/clickHide"
                                         android:fontFamily="@font/avenirblack"
-                                        android:textSize="32dp"
+                                        android:textSize="24dp"
                                         android:textColor="#FFFFFF"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Play surah Alquran">
+                                        android:text="Play surah Al Quran">
 
                                     </TextView>
                                     <SearchView
+
                                         android:id="@+id/sv"
                                         android:layout_width="wrap_content"
                                         android:layout_height="30dp"
                                         android:layout_marginLeft="-20dp"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginTop="12dp"
                                         android:layout_marginBottom="5dp"
                                         android:focusable="true"
                                         android:focusableInTouchMode="true"
@@ -448,6 +453,7 @@
                                         android:background="#D9D9D9"
                                         android:orientation="vertical"></LinearLayout>
                                     <androidx.recyclerview.widget.RecyclerView
+                                        android:layout_marginTop="12dp"
                                         android:visibility="visible"
                                         android:id="@+id/rv"
                                         android:layout_width="match_parent"

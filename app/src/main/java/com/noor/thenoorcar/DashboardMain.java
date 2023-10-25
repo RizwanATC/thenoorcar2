@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.noor.thenoorcar.Fragment.AlquranFragment;
 import com.noor.thenoorcar.Fragment.AsmaFragment;
@@ -21,6 +22,15 @@ public class DashboardMain extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         int intValue = preferences.getInt("int_key", 0);
+
+        if (getIntent() != null && getIntent().getBooleanExtra("SHOW_PRAYER_FRAGMENT", false)) {
+            // Load the PrayerFragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, new LocationFragment())
+                    .commit();
+        }
+
         if(intValue==0){
             getSupportFragmentManager()
                     .beginTransaction()
